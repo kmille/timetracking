@@ -96,7 +96,6 @@ def data():
         cur.execute(db_query_select)
         rows = cur.fetchall()
         for row in rows:
-            print(row)
             t = arrow.get(row[1], "X").format("YYYY-MM-DD HH:MM:ss")
             print(t)
         return str(rows)
@@ -106,5 +105,5 @@ def data():
         conn.close()
 
 
-if __name__ == '__name__':
+if __name__ == '__main__':
     app.run(host, port, debug=debug)

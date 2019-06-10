@@ -26,3 +26,4 @@ or: gunicorn --bind 127.0.0.1:5001 app:app
 - automatically close the window (javascript is not allowed to do)
 - nice format for /data
 - calc: how long have I been worked?
+- timezone fuckup
