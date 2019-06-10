@@ -106,4 +106,5 @@ def data():
         conn.close()
 
 
-app.run(host, port, debug=debug)
+if __name__ == '__name__':
+    app.run(host, port, debug=debug)

@@ -19,6 +19,7 @@ virtualenv -p python3 venv
 source venv/bin/activate
 pip install -r requirements.txt
 python app.py
+or: gunicorn --bind 127.0.0.1:5001 app:app 
 ```
 
 # todo
