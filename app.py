@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 import os.path
 import arrow
-
 from flask import Blueprint, Flask, request
 import sqlite3
 
@@ -11,7 +10,8 @@ db_name = "times.db"
 db_query_create = "CREATE TABLE time_tracking (action text, time text)"
 db_query_insert = "INSERT INTO time_tracking (action, time) VALUES (?,?)"
 db_query_select = "SELECT action, time from time_tracking"
-client_secret = "test123"
+
+from settings import host, port, debug, client_secret
 
 html = """
 
@@ -27,11 +27,9 @@ html = """
             if (this.readyState == 4 && this.status == 200) {
                      //eval(xhr.responseText);
                      //window.close();
-
             }
         };
     </script>
-    <input type="button" value="Close this window" onclick="self.close()">
 
 
 """
@@ -67,7 +65,7 @@ def index():
 @app.route("/time/free", methods=['POST', 'GET'])
 def work():
     if request.method == "GET":
-        if not "secret" in request.args.keys() or request.args['secret'] != client_secret:
+        if "secret" not in request.args.keys() or request.args['secret'] != client_secret:
             return "YOU SHALL NOT PASS", 403
         return html
     if request.method == "POST":
@@ -88,6 +86,7 @@ def work():
     
         return "window.close()"
 
+
 @app.route("/time/data")
 def data():
     try:
@@ -106,8 +105,5 @@ def data():
     finally:
         conn.close()
 
-@app.route("/info")
-def info():
-    return "http://192.168.10.114:5000/time/free"
 
-app.run("0.0.0.0", debug=True)
+app.run(host, port, debug=debug)
