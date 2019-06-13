@@ -6,7 +6,7 @@ import os.path
 from flask import Flask, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 
-from settings import host, port, debug, client_secret, WORK, FREE, log_file
+from settings import host, port, debug, WORK, FREE, log_file
 
 from ipdb import set_trace
 
