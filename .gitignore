@@ -1,4 +1,5 @@
 times.db
+time.log
 venv
 settings.py
 *cache*

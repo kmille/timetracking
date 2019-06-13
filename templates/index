@@ -1,0 +1,52 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Time Time Time</title>
+  <meta name="description" content="The HTML5 Herald">
+  <meta name="author" content="SitePoint">
+
+  </head>
+  <body>
+      <h2>Current state: {{state}} </h2>
+
+  {% if state == 'work' %}
+      <form method="GET" action="/free" >
+          <input type="submit" value="Stop working"/>
+      </form>
+  {% else %}
+      <form method="GET" action="/work" >
+        <input type="submit" value="Start working"/>
+      </form>
+  {% endif %}
+  
+  <br>
+  <br>
+  <br>
+
+
+  {% for date, data_day in data.items()  %}
+    {{ date }} <br>
+    {% for i in range(0,data_day['time_records']|length, 2) %}
+        {{ data_day['time_records'][i]['time'] }}
+        -
+        {{ data_day['time_records'][i+1]['time'] }}
+        <br>
+    {% endfor %}
+    total: {{ data[date]['total_time_nice'] }} <br>
+    <br>
+
+  {% endfor %}
+
+
+    <script>
+        var days = ['Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag', 'Sonntag'];
+        var d = new Date("12.06.2012");
+        var dayName = days[d.getDay()];
+        console.log(dayName);
+    </script>
+
+</body>
+</html>
